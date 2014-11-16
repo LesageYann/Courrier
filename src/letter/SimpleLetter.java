@@ -1,19 +1,31 @@
 package letter;
 
+import inhabitant.DebitException;
 import inhabitant.Inhabitant;
 
-public class SimpleLetter extends Letter<String> {
+public class SimpleLetter extends NotUrgentLetter<String> {
 
-	public SimpleLetter(Inhabitant recipient,Inhabitant sender,String content) {
+	/**
+	 * constructor
+	 * @param recipient
+	 * @param sender
+	 * @param content String a message
+	 */
+	public SimpleLetter(Inhabitant recipient,Inhabitant sender,String content) throws DebitException {
 		super(recipient, sender, content);
 	}
 
-	@Override
+	/**
+	 * do nothing
+	 */
 	public void action() {
 		//do nothing
 	}
 
-	@Override
+	/**
+	 * 
+	 * @return description of the letter and these content
+	 */
 	public String getDescription() {
 		return this.content;
 	}

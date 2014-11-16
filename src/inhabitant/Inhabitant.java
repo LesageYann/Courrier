@@ -4,7 +4,7 @@ import letter.Letter;
 
 public class Inhabitant {
 
-	private static final double DEFAULT_ACCOUNT_STARTING_MONEY = 42;
+	private static final double DEFAULT_ACCOUNT_STARTING_MONEY = 5000;
 	protected String name;
 	protected BankAccount account;
 	protected City city;
@@ -34,9 +34,13 @@ public class Inhabitant {
 	public BankAccount getAccount(){
 		return this.account;
 	}
+	
+	/**
+	 * Receive a letter and apply these effects.
+	 * @param letter
+	 */
 	public void recieveLetter(Letter<?> letter) {
 		letter.action();
-		
 	}
 
 	public City getCity() {

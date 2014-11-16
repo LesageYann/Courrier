@@ -12,22 +12,40 @@ public class City {
 	private List<Letter<?>> postBox;
 	private Set<Inhabitant> inhabitants;
 	
+	/**
+	 * constructor
+	 * @param nom
+	 */
 	City(String nom){
 		this.nom = nom;
 		this.postBox=new ArrayList<Letter<?>>();
 	}
 	
+	/**
+	 * Send a letter. The letter the letter will be received at the next call of distributedLetter()
+	 * @param letter
+	 */
 	public void sendLetter(Letter<?> letter){
 		this.postBox.add(letter);
 	}
 	
+	/**
+	 * distributed all Letters;
+	 */
 	public void distributedLetter(){
-		while(!postBox.isEmpty()){
-			Letter<?> letter=postBox.remove(0);
+		/*a tempory reference to not send the acknowledge receipt the same day*/
+		List<Letter<?>> postBoxTemp = postBox;
+		this.postBox=new ArrayList<Letter<?>>();
+		while(!postBoxTemp.isEmpty()){
+			Letter<?> letter=postBoxTemp.remove(0);
 			letter.getRecipient().recieveLetter(letter);
 		}
 	}
 
+	/**
+	 * Add a new inhabitant in the city
+	 * @param inhabitant
+	 */
 	public void addInhabitant(Inhabitant inhabitant) {
 		this.inhabitants.add(inhabitant);
 	}
