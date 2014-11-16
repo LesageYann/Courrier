@@ -17,7 +17,7 @@ public class BankAccountTest {
 	@Test
 	public void testWithdrawal() {
 		BankAccount account= new BankAccount((double) 5000);
-		account.withdrawal((double) 1000);
+		account.debit((double) 1000);
 		assertEquals(4000, account.getAccountValue(), 100);
 	}
 

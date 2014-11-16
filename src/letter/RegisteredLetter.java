@@ -1,24 +1,24 @@
 package letter;
 
 import inhabitant.Inhabitant;
-import contents.CLetter;
 
-public class RegisteredLetter extends Letter<CLetter> {
+public class RegisteredLetter extends NotUrgentLetter<Letter<?>> {
+	protected int additionalCost = 15;
 
-	public RegisteredLetter(CLetter contents, Inhabitant sender, Inhabitant recipient) {
-		// TODO Auto-generated constructor stub
+	public RegisteredLetter(Inhabitant recipient, Inhabitant sender, Letter<?> letter) {
+		super(recipient, sender, letter);
 	}
 
-	@Override
-	public boolean action() {
-		return false;
-		// TODO Auto-generated method stub
-		
+	public void action() {
+		this.content.action();
+		this.recipient.getCity().sendLetter(new SimpleLetter(this.sender,this.recipient,"I've recieved you're letter, it was kind! <3"));
 	}
 
-	@Override
 	public double cost() {
-		return this.contents.cost()*2;
+		return this.content.cost() + this.additionalCost;
 	}
 
+	public String getDescription() {
+		return content.getDescription();
+	}
 }

@@ -1,25 +1,27 @@
 package inhabitant;
 
 import letter.Letter;
-import contents.Contents;
 
 public class Inhabitant {
 
-	private String name;
-	private BankAccount account;
-
+	private static final double DEFAULT_ACCOUNT_STARTING_MONEY = 42;
+	protected String name;
+	protected BankAccount account;
+	protected City city;
 	/**
 	 * create an inhabitant
-	 * @param name a string 
+	 * @param the name of the Inhabitant
+	 * @param the city where he's living
 	 */
-	public Inhabitant(String name) {
+	public Inhabitant(String name,City city) {
 		this.name=name;
-		this.account = new BankAccount((double) 5000);
+		this.account = new BankAccount(DEFAULT_ACCOUNT_STARTING_MONEY);
+		this.city=city;
 	}
 
 	/**
 	 *  get inhabitant's name
-	 * @return a string for the name
+	 * @return the name of the inhabitant
 	 */
 	public String getName(){
 		return this.name;
@@ -32,10 +34,13 @@ public class Inhabitant {
 	public BankAccount getAccount(){
 		return this.account;
 	}
-	
-	
-	public boolean receiveLetter(Letter<Contents> letter){
+	public void recieveLetter(Letter<?> letter) {
+		letter.action();
 		
-		return true;
+	}
+
+	public City getCity() {
+		return this.city;
+		
 	}
 }

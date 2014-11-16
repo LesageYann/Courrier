@@ -1,33 +1,34 @@
 package inhabitant;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import letter.Letter;
-import contents.Contents;
 
 public class City {
 
 	private String nom;
-	private Set<Letter<Contents>> postBox;
+	private List<Letter<?>> postBox;
 	private Set<Inhabitant> inhabitants;
 	
 	City(String nom){
 		this.nom = nom;
+		this.postBox=new ArrayList<Letter<?>>();
 	}
 	
-	public void sendLetter(Letter letter){
-		
+	public void sendLetter(Letter<?> letter){
+		this.postBox.add(letter);
 	}
 	
 	public void distributedLetter(){
-		
+		while(!postBox.isEmpty()){
+			Letter<?> letter=postBox.remove(0);
+			letter.getRecipient().recieveLetter(letter);
+		}
 	}
 
-	public Set<Inhabitant> getInhabitants() {
-		return inhabitants;
-	}
-
-	public void setNewInhabitant(Inhabitant inhabitant) {
+	public void addInhabitant(Inhabitant inhabitant) {
 		this.inhabitants.add(inhabitant);
 	}
 

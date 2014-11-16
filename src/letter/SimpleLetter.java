@@ -1,24 +1,21 @@
 package letter;
 
 import inhabitant.Inhabitant;
-import contents.CString;
 
-public class SimpleLetter extends Letter<CString> {
+public class SimpleLetter extends Letter<String> {
 
-	public SimpleLetter(CString contents, Inhabitant sender, Inhabitant recipient) {
-		super(contents, sender, recipient);
+	public SimpleLetter(Inhabitant recipient,Inhabitant sender,String content) {
+		super(recipient, sender, content);
 	}
 
 	@Override
-	public boolean action() {
-		return false;
-		// TODO Auto-generated method stub
-		
+	public void action() {
+		//do nothing
 	}
 
 	@Override
-	public double cost() {
-		return 1;
+	public String getDescription() {
+		return this.content;
 	}
 
 }

@@ -2,21 +2,17 @@ package inhabitant;
 
 public class BankAccount {
 
-	private Double account;
+	protected Double account;
 
-	public BankAccount(Double i) {
-		this.account=i;
+	public BankAccount(Double account) {
+		this.account=account;
 	}
 
-	public void credit(Double i){
-		
+	public void credit(Double creditValue){
+		this.account+=creditValue;
 	}
 	
-	public void withdrawal(Double i){
-		
-	}
-
-	public Double getAccountValue() {
-		return this.account;
+	public void debit(Double withdrawalValue){
+		this.account-=withdrawalValue;
 	}
 }
