@@ -11,7 +11,7 @@ public class SimpleLetter extends NotUrgentLetter<String> {
 	 * @param sender
 	 * @param content String a message
 	 */
-	public SimpleLetter(Inhabitant recipient,Inhabitant sender,String content) throws DebitException {
+	public SimpleLetter(Inhabitant recipient,Inhabitant sender,String content){
 		super(recipient, sender, content);
 	}
 
@@ -27,7 +27,7 @@ public class SimpleLetter extends NotUrgentLetter<String> {
 	 * @return description of the letter and these content
 	 */
 	public String getDescription() {
-		return this.content;
+		return "simpleLetter content : '"+content+"'";
 	}
 
 }

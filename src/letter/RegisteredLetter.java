@@ -13,7 +13,7 @@ public class RegisteredLetter extends NotUrgentLetter<Letter<?>> {
 	 * @param letter
 	 * @throws DebitException 
 	 */
-	public RegisteredLetter(Inhabitant recipient, Inhabitant sender, Letter<?> letter) throws DebitException {
+	public RegisteredLetter(Inhabitant recipient, Inhabitant sender, Letter<?> letter){
 		super(recipient, sender, letter);
 	}
 
@@ -23,7 +23,8 @@ public class RegisteredLetter extends NotUrgentLetter<Letter<?>> {
 	public void action() {
 		this.content.action();
 		try {
-			this.recipient.getCity().sendLetter(new SimpleLetter(this.sender,this.recipient,"I've recieved you're letter, it was kind! <3"));
+			this.recipient.getCity().sendLetter(new SimpleLetter
+					(this.sender,this.recipient,"I've recieved you're letter, it was kind! <3"));
 		} catch (DebitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,6 +44,6 @@ public class RegisteredLetter extends NotUrgentLetter<Letter<?>> {
 	 * @see letter.Letter#getDescription()
 	 */
 	public String getDescription() {
-		return content.getDescription();
+		return content.getDescription()+" as a registeredLetter.";
 	}
 }

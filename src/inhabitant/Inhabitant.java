@@ -40,11 +40,16 @@ public class Inhabitant {
 	 * @param letter
 	 */
 	public void recieveLetter(Letter<?> letter) {
+		System.out.println("<- " +this.name+ " receives a" + letter.getDescription()+ " from "+ letter.getSender());
 		letter.action();
 	}
 
 	public City getCity() {
 		return this.city;
 		
+	}
+	
+	public String toString(){
+		return this.name;
 	}
 }

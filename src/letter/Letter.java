@@ -4,7 +4,7 @@ import inhabitant.DebitException;
 import inhabitant.Inhabitant;
 
 public abstract class Letter<Content> {
-	protected int cost = 1;
+	protected Double cost = (double) 1;
 	protected Inhabitant recipient;
 	protected Inhabitant sender;
 	protected Content content;
@@ -16,14 +16,10 @@ public abstract class Letter<Content> {
 	 * @param content a Content
 	 * @throws DebitException
 	 */
-	public Letter(Inhabitant recipient,Inhabitant sender,Content content) throws DebitException{
-		if(sender.getAccount().getAccountValue()<this.cost()){
-			throw new DebitException();
-		}
+	public Letter(Inhabitant recipient,Inhabitant sender,Content content){
 		this.recipient = recipient;
 		this.sender=sender;
 		this.content=content;
-		sender.getAccount().debit(this.cost());
 	}
 	
 	/**
@@ -69,5 +65,9 @@ public abstract class Letter<Content> {
 	 */
 	public Inhabitant getRecipient(){
 		return this.recipient;
+	}
+
+	public Inhabitant getSender() {
+		return this.sender;
 	}
 }

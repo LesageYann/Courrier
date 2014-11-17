@@ -7,13 +7,13 @@ public class UrgentLetter extends Letter <NotUrgentLetter<?>>{
 	private final double multiplier=2;
 	
 	
-	public UrgentLetter(Inhabitant recipient,Inhabitant sender,NotUrgentLetter<?> notUrgentLetter) throws DebitException{
+	public UrgentLetter(Inhabitant recipient,Inhabitant sender,NotUrgentLetter<?> notUrgentLetter){
 		super(recipient, sender, notUrgentLetter);
 	}
 	
 	
 	/**
-	 * Launch the letter's action and  send an acknowledge reception
+	 * Launch the letter's action
 	 */
 	public void action() {
 		content.action();
@@ -32,6 +32,6 @@ public class UrgentLetter extends Letter <NotUrgentLetter<?>>{
 	 * @return description of the letter and these content
 	 */
 	public String getDescription() {
-		return this.content.getDescription();
+		return this.content.getDescription()+" as an UrgentLetter";
 	}
 }

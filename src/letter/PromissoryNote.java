@@ -13,9 +13,19 @@ public class PromissoryNote extends NotUrgentLetter<Double> {
 	 * @param Double money send by letter
 	 * @throws DebitException 
 	 */
-	public PromissoryNote(Inhabitant recipient,Inhabitant sender,double money) throws DebitException {
+	public PromissoryNote(Inhabitant recipient,Inhabitant sender,double money){
 		super(recipient, sender, money);
-		this.sender.getAccount().debit(this.content);
+		try {
+			sender.getAccount().debit(money);
+		} catch (Exception e) {
+			System.out.println(sender +" can't send this sum. But send"+ sender.getAccount().getAccountValue());
+			this.content =sender.getAccount().getAccountValue();
+			try {
+				sender.getAccount().debit(this.content);
+			} catch (DebitException e1) {
+				System.out.println(sender +" can't send this sum. Error");
+			}
+		}
 	}
 	
 	/**
@@ -23,16 +33,18 @@ public class PromissoryNote extends NotUrgentLetter<Double> {
 	 * @throws DebitException 
 	 */
 	public void action(){
+		this.recipient.getAccount().credit(this.content);
 		try {
-			this.recipient.getCity().sendLetter(new SimpleLetter(this.sender,this.recipient,"Thanks for that dude"));
+			this.recipient.getCity().sendLetter(new SimpleLetter
+					(this.sender,this.recipient,"Thanks for that dude"));
 		} catch (Exception e) {
 			System.out.println(this.recipient.getName()+" can't send thank tou letter." );
 		}
-		this.recipient.getAccount().credit(this.content);
+		
 	}
 	
 	public double cost(){
-		return this.cost+(content*multiplier);
+		return this.cost+ (this.content*multiplier);
 	}
 	
 	/**
@@ -40,6 +52,6 @@ public class PromissoryNote extends NotUrgentLetter<Double> {
 	 * @return description of the letter and these content
 	 */
 	public String getDescription() {
-		return sender.getName()+"send : "+content+" to "+recipient.getName();
+		return "PromissoryNote content : "+content;
 	}
 }
